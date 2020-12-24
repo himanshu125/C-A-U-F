@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Chat App</title>
+    <style>
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.button2 {background-color: #008CBA;} /* Blue */
+.button3 {background-color: #f44336;} /* Red */
+.button4 {background-color: #e7e7e7; color: black;} /* Gray */
+.button5 {background-color: #555555;} /* Black */
+</style>
+</head>
+<body bgcolor="#d9d9d9">
+<center>
+<br><br><br>
+<h1 style="color:black;">U CHAT</h1><br><br>
+<h3 style="color:darkblue;">Hi {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Guest{% endif %}!</h3>
+
+{% if current_user.is_authenticated %}
+
+<button class="button" onclick="document.location='/create-room'">Create Room</button>&nbsp;&nbsp;&nbsp;
+<button class="button button3" onclick="document.location='/logout'">Logout</button>
+    <h2 style="color:red;">My rooms</h2>
+    <ul>
+        {% for room in rooms %}
+            <p style="color:green; font-size:16px;"><a href="/rooms/{{ room._id.room_id }}">{{ room.room_name }}</a></p>
+        {% endfor %}
+    </ul>
+    <!--
+<a href="/login">Login</a>
+
+-->
+    {% else %}
+    <button class="button" onclick="document.location='/login'">Login</button>&nbsp;&nbsp;&nbsp;
+<button class="button button2" onclick="document.location='/signup'">New User ? Register</button>
+
+
+{% endif %}
+</center>
+</body>
+</html>
